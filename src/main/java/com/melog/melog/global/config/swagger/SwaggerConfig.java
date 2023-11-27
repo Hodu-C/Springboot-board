@@ -1,4 +1,4 @@
-package com.melog.melog.config.swagger;
+package com.melog.melog.global.config.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

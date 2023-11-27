@@ -1,4 +1,4 @@
-package com.melog.melog.domain.user.controller;
+package com.melog.melog.domain;
 
 import jakarta.annotation.PreDestroy;
 import org.springframework.context.annotation.Scope;
