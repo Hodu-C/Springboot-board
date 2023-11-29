@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Table(name = "users")
@@ -21,8 +22,8 @@ public class User extends BaseTimeEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
     private Long id;
+
 
     @Column(nullable = false, unique = true, length = 50)
     private String email; //아이디로 활용
@@ -34,6 +35,8 @@ public class User extends BaseTimeEntity implements Serializable {
 
     @Column(nullable = false, length = 30)
     private Integer age;
+
+    private LocalDateTime lastLogin;
 
     @Enumerated(EnumType.STRING)
     private Role role;

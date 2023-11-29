@@ -5,6 +5,7 @@ import com.melog.melog.domain.user.dto.UserSignUpDto;
 import com.melog.melog.domain.user.dto.UserUpdateDto;
 
 public interface UserService {
+
     void signUp(UserSignUpDto userSignUpDto) throws Exception;
 
     void update(UserUpdateDto userUpdateDto, String email) throws Exception;
