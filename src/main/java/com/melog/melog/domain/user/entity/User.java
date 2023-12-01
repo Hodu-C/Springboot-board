@@ -1,13 +1,10 @@
-package com.melog.melog.domain.user;
+package com.melog.melog.domain.user.entity;
 
 import com.melog.melog.domain.BaseTimeEntity;
-import com.melog.melog.domain.user.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Table(name = "users")
 @Entity

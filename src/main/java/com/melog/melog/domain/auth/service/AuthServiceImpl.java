@@ -1,21 +1,14 @@
 package com.melog.melog.domain.auth.service;
 
 import com.melog.melog.domain.auth.dto.SignInDto;
-import com.melog.melog.domain.user.User;
+import com.melog.melog.domain.user.entity.User;
 import com.melog.melog.domain.user.repository.UserRepository;
-import com.melog.melog.global.error.*;
 import com.melog.melog.global.response.ResultCode;
-import com.melog.melog.global.response.ResultResponse;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
-import java.util.Optional;
-
-import com.melog.melog.global.error.GlobalExceptionHandler;
 
 import static com.melog.melog.global.response.ResultCode.*;
 

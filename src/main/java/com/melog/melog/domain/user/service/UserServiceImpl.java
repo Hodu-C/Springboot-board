@@ -1,17 +1,15 @@
 package com.melog.melog.domain.user.service;
 
-import com.melog.melog.domain.user.User;
-import com.melog.melog.domain.user.dto.UserInfoDto;
-import com.melog.melog.domain.user.dto.UserSignUpDto;
-import com.melog.melog.domain.user.dto.UserUpdateDto;
+import com.melog.melog.domain.user.entity.User;
+import com.melog.melog.domain.user.dto.request.UserSignUpDto;
+import com.melog.melog.domain.user.dto.request.UserUpdateDto;
 import com.melog.melog.domain.user.repository.UserRepository;
+import com.melog.melog.global.error.BusinessException;
+import com.melog.melog.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +17,16 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+
+
+    //querydsl
+    //findbyid 할때
+    @Override
+    public User info(Long id){
+        User user = userRepository.findById(id).orElseThrow(()->
+                new BusinessException(ErrorCode.USER_NOT_FOUND));
+        return user;
+    }
 
     @Override
     public void signUp(UserSignUpDto userSignUpDto) throws Exception {
@@ -28,24 +36,21 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void update(Long id, UserUpdateDto userUpdateDto) throws Exception {
-        User user = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        //변경 전 user
-        log.info("변경 전 = {}", user);
-        user.setName(userUpdateDto.changeName());
-        user.setAge(userUpdateDto.changeAge());
+    public User update(Long id, UserUpdateDto userUpdateDto) throws Exception {
+        User user = userRepository.findById(id).orElseThrow(()->
+                new BusinessException(ErrorCode.USER_NOT_FOUND));
 
-        //변경 후 user
-        log.info("변경 후 = {}", user);
+        user.setName(userUpdateDto.name());
+        user.setAge(userUpdateDto.age());
+
+        return user;
     }
 
     @Override
-    public UserInfoDto getInfo(Long id) throws Exception {
-        return null;
-    }
+    public void delete(Long id){
+        User user = userRepository.findById(id).orElseThrow(()->
+                new BusinessException(ErrorCode.USER_NOT_FOUND));
 
-    @Override
-    public UserInfoDto getMyInfo() throws Exception {
-        return null;
+        userRepository.deleteById(user.getId());
     }
 }

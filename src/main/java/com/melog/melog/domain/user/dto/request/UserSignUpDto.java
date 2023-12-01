@@ -1,10 +1,9 @@
-package com.melog.melog.domain.user.dto;
+package com.melog.melog.domain.user.dto.request;
 
-import com.melog.melog.domain.user.Role;
-import com.melog.melog.domain.user.User;
+import com.melog.melog.domain.user.entity.Role;
+import com.melog.melog.domain.user.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 
