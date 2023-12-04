@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService{
     public User update(Long id, UserUpdateDto userUpdateDto) throws Exception {
         User user = userRepository.findById(id).orElseThrow(()->
                 new BusinessException(ErrorCode.USER_NOT_FOUND));
-
-        user.setName(userUpdateDto.name());
-        user.setAge(userUpdateDto.age());
+        user.updateName(userUpdateDto.name());
+        user.updateAge(userUpdateDto.age());
+        userRepository.save(user);
 
         return user;
     }
