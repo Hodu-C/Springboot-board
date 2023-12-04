@@ -1,22 +1,22 @@
 package com.melog.melog.domain.user.entity;
 
 import com.melog.melog.domain.BaseTimeEntity;
+import com.melog.melog.domain.board.entity.Board;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@Table(name = "users")
-@Entity
 @Getter
-@Setter
-@ToString
+@ToString(exclude = "password")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User extends BaseTimeEntity implements Serializable {
-
-
+@Entity
+@Table(name = "users")
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +35,11 @@ public class User extends BaseTimeEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public void updateName(String name) {
+        this.name = name;
+    }
+    public void updateAge(Integer age) {
+        this.age = age;
+    }
 }
