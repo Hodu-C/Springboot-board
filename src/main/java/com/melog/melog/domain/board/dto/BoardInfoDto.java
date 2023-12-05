@@ -6,16 +6,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardFindAllDto {
+public class BoardInfoDto {
+
+    private Long id;
     private String title;
     private String content;
+    private long count;
     private String name;
 
-    public static BoardFindAllDto toDto(Board board) {
-        return new BoardFindAllDto(board.getTitle(), board.getContent(), board.getUser().getName());
+    public static BoardInfoDto toDto(Board board) {
+        return new BoardInfoDto(board.getId(), board.getTitle(), board.getContent(),board.getCount(),
+                board.getUser().getName());
     }
 
 }

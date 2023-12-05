@@ -7,8 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResultCode {
 
-
-    //성공
     //회원
     INFO_SUCCESS(200, "회원 정보를 조회합니다."),
     SIGNUP_SUCCESS(201, "회원가입에 성공하였습니다."),
@@ -21,6 +19,7 @@ public enum ResultCode {
     BOARD_EDIT_SUCCESS(200, "게시물을 수정하였습니다."),
     BOARD_DELETE_SUCCESS(200, "게시물을 삭제하였습니다."),
     BOARD_FIND_SUCCESS(200, "게시물을 조회합니다"),
+    BOARD_FINDALL_SUCCESS(200, "전체 게시물을 조회합니다."),
 
 
     //에러
