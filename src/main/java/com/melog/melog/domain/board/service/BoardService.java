@@ -1,7 +1,7 @@
 package com.melog.melog.domain.board.service;
 
 
-import com.melog.melog.domain.board.dto.BoardFindAllDto;
+import com.melog.melog.domain.board.dto.BoardInfoDto;
 import com.melog.melog.domain.board.dto.BoardCreateDto;
 import com.melog.melog.domain.board.dto.BoardEditDto;
 import com.melog.melog.domain.board.entity.Board;
@@ -24,22 +24,22 @@ public class BoardService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public Page<BoardFindAllDto> findAllBoards(Pageable pageable) {
+    public Page<BoardInfoDto> findAllBoards(Pageable pageable) {
         Page<Board> boards = boardRepository.findAll(pageable);
-        return boards.map(BoardFindAllDto::toDto);
+        return boards.map(BoardInfoDto::toDto);
     }
 
     @Transactional(readOnly = true)
-    public Board findBoard(Long id) {
-        Board board = boardRepository.findById(id).orElseThrow(() ->
+    public BoardInfoDto findBoard(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() ->
                 new BusinessException((ErrorCode.BOARD_NOT_FOUND)));
         board.increaseCount();
-        return board;
+        return BoardInfoDto.toDto(board);
     }
 
     @Transactional
-    public Board createBoard(long id, BoardCreateDto boardCreateDto) {
-        User user = userRepository.findById(id).orElseThrow(() ->
+    public void createBoard(long userId, BoardCreateDto boardCreateDto) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
                 new BusinessException(ErrorCode.USER_NOT_FOUND));
 
         Board board = Board.builder()
@@ -48,16 +48,14 @@ public class BoardService {
                 .content(boardCreateDto.getContent())
                 .build();
         boardRepository.save(board);
-        return board;
     }
 
     @Transactional
-    public Board editBoard(long id, BoardEditDto boardEditDto) {
-        Board board = boardRepository.findById(id).orElseThrow(() ->
+    public void editBoard(long boardId, BoardEditDto boardEditDto) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() ->
                 new BusinessException((ErrorCode.BOARD_NOT_FOUND)));
         board.setTitle(boardEditDto.getTitle());
         board.setContent(boardEditDto.getContent());
-        return board;
     }
 
     @Transactional
