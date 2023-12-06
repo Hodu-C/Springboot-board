@@ -1,20 +1,14 @@
 package com.melog.melog.domain.user.entity;
 
 import com.melog.melog.domain.BaseTimeEntity;
-import com.melog.melog.domain.board.entity.Board;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
-@ToString(exclude = "password")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
+@Builder
 @Table(name = "users")
 public class User extends BaseTimeEntity {
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
-
+    EMAIL_ALREADY_EXISTS(400, "존재하는 이메일 입니다."),
     BOARD_NOT_FOUND(400, "게시물을 찾을 수 없습니다."),
     USER_NOT_FOUND(400, "유저 정보를 찾을 수 없습니다."),
     LOGIN_FAILED_EMAIL_NULL(400, "이메일이 존재하지 않습니다."),
