@@ -14,6 +14,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.naming.AuthenticationException;
 
+import static com.melog.melog.global.response.ResultCode.SIGNUP_SUCCESS;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -21,13 +23,12 @@ import javax.naming.AuthenticationException;
 @Slf4j
 @RequestMapping("/auth")
 public class AuthController {
-
     private final AuthService authService;
 
     @PostMapping("/signup")
     public ResponseEntity<ResultResponse> signup(@Valid @RequestBody AuthSignUpDto authSignUpDto){
         authService.signUp(authSignUpDto);
-        return ResponseEntity.ok(ResultResponse.of(ResultCode.SIGNUP_SUCCESS));
+        return ResponseEntity.ok(ResultResponse.of(SIGNUP_SUCCESS));
     }
 
     @PostMapping("/signin")

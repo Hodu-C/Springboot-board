@@ -20,7 +20,7 @@ public class BoardInfoDto {
     private String name;
 
     public static BoardInfoDto toDto(Board board) {
-        return new BoardInfoDto(board.getId(), board.getTitle(), board.getContent(),board.getCount(),
+        return new BoardInfoDto(board.getBoardId(), board.getTitle(), board.getContent(),board.getCount(),
                 board.getUser().getName());
     }
 

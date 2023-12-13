@@ -6,7 +6,6 @@ import com.melog.melog.domain.user.entity.Role;
 import com.melog.melog.domain.user.entity.User;
 import com.melog.melog.domain.user.repository.UserRepository;
 import com.melog.melog.global.error.BusinessException;
-import com.melog.melog.global.error.ErrorCode;
 import com.melog.melog.global.response.ResultCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.naming.AuthenticationException;
 
+import static com.melog.melog.global.error.ErrorCode.EMAIL_ALREADY_EXISTS;
 import static com.melog.melog.global.response.ResultCode.*;
 
 @Service
@@ -50,24 +50,16 @@ public class AuthService {
 
     @Transactional
     public void signUp(AuthSignUpDto authSignUpDto){
-        validateSignUpDto(authSignUpDto);
-        User user = createSignUptoEntity(authSignUpDto);
-        userRepository.save(user);
-    }
-
-    private void validateSignUpDto(AuthSignUpDto authSignUpDto) {
         if (userRepository.existsByEmail(authSignUpDto.email())) {
-            throw new BusinessException(ErrorCode.EMAIL_ALREADY_EXISTS);
+            throw new BusinessException(EMAIL_ALREADY_EXISTS);
         }
-    }
-
-    private User createSignUptoEntity(AuthSignUpDto authSignUpDto){
-        return User.builder()
+        User user = User.builder()
                 .email(authSignUpDto.email())
                 .password(passwordEncoder.encode(authSignUpDto.password()))
                 .name(authSignUpDto.name())
                 .age(authSignUpDto.age())
                 .role(Role.USER)
                 .build();
+        userRepository.save(user);
     }
 }
