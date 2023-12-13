@@ -15,7 +15,7 @@ import lombok.*;
 public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long boardId;
 
     @Column(name = "title", nullable = false)
     private String title;
